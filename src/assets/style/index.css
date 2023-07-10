@@ -1,0 +1,9 @@
+* {
+    font-family: courier-new, courier, monospace;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

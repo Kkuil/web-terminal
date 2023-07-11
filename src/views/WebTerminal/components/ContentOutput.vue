@@ -36,7 +36,7 @@ const outputTagColor = computed((): string => {
       <div
         v-if="outputTagColor"
         class="p-[3px] mr-[10px] rounded-[5px]"
-        :class="`bg-[${outputTagColor}]`"
+        :style='`background: ${outputTagColor}; color: #fff;`'
       >
         {{ output.status }}
       </div>

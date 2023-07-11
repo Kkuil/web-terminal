@@ -1,49 +1,57 @@
-import { ref } from 'vue'
-import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
+import commandParser from '@/core/commandParser'
+import commandExecutor from '@/core/commandExecutor'
 
-export const useCommandStore = defineStore('command', () => {
-  // 命令输入
-  const commandInput: Ref<WebTerminal.CommandInputType> = ref<WebTerminal.CommandInputType>({
-    command: '',
-    hint: ''
-  })
-
-  // 命令输出列表
-  const listOutput = ref<WebTerminal.CommandOutputType[]>([
-    {
-      id: '1',
-      command: '123',
-      output: {
-        type: 'text',
-        text: 'Hello Web',
-        status: 'success',
-        collapsible: true
+export const useCommandStore = defineStore('command', {
+  state: () => ({
+    commandInput: {
+      command: '',
+    },
+    listOutput: [] as WebTerminal.CommandOutputType[]
+  }),
+  actions: {
+    // 提交命令
+    submitCommand(command: string) {
+      if (!command || !command.trim()) {
+        return
       }
-    }
-  ])
+      // 清空命令输入
+      this.commandInput.command = ''
+      // 自动滚动到底部
+      setTimeout(() => {
+        const documentHeight = document.documentElement.scrollHeight
+        const windowHeight = window.innerHeight
+        window.scrollTo(0, documentHeight - windowHeight)
+      }, 50)
 
-  // 执行命令
-  const execCommand = (command: string) => {
-    if (!command || !command.trim()) {
-      return
-    }
-    // 清空命令输入
-    commandInput.value.command = ''
-    // 执行命令
-    // 增加命令输出
-    const newOutPut: WebTerminal.CommandOutputType = {
-      id: Date.now().toString(),
-      command,
-      output: {
-        type: 'text',
-        text: 'Hello Web',
-        status: 'success',
-        collapsible: true
+      // 1. 解析命令
+      const parsedCommand = commandParser(command)
+      // 2. 执行命令
+      commandExecutor(parsedCommand)
+    },
+    // 清屏
+    clear() {
+      this.listOutput = []
+    },
+    // 增加输出
+    addOutput(command: string, output: WebTerminal.OutputType) {
+      const newOutput: WebTerminal.CommandOutputType = {
+        id: Date.now().toString(),
+        command,
+        output
       }
+      this.listOutput.push(newOutput)
     }
-    listOutput.value.push(newOutPut)
   }
-
-  return { commandInput, listOutput, execCommand }
+  // 持久化
+  // persist: {
+  //   key: 'command-store',
+  //   storage: window.localStorage,
+  //   beforeRestore: (context) => {
+  //     console.log('load spaceStore data start')
+  //   },
+  //   afterRestore: (context) => {
+  //     console.log('load spaceStore data end')
+  //   }
+  // }
 })

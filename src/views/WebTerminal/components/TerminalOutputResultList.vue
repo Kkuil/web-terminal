@@ -2,18 +2,24 @@
 import { defineProps } from 'vue'
 import ContentOutput from './ContentOutput.vue'
 
-defineProps({
-  list: {
-    type: Array,
-    required: true
-  }
-})
+defineProps<{
+  list: WebTerminal.CommandOutputType[]
+}>()
 </script>
 
 <template>
   <div v-for="result in list" :key="result.id">
     [local]$ <span>{{ result.command }}</span>
-    <ContentOutput :output="result.output" />
+    <ContentOutput
+      v-if="!result.output?.resultList?.length"
+      :output="result.output as WebTerminal.OutputType"
+    />
+    <ContentOutput
+      v-else
+      v-for="output in result.output.resultList"
+      :key="output.id"
+      :output="output"
+    />
   </div>
 </template>
 

@@ -28,10 +28,10 @@ export const historyCommand: Command.ICommandType = {
       required: false
     },
     {
-      key: 'clean',
+      key: 'clear',
       alias: ['l'],
       desc: '清空历史',
-      type: 'string',
+      type: 'boolean',
       required: false
     }
   ],

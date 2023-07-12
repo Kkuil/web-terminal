@@ -1,13 +1,19 @@
 import { seeTimeCommand } from '@/core/commands/SeeTime/seeTimeCommand'
 import { clearScreenCommand } from '@/core/commands/ClearScreen/clearScreenCommand'
 import { changeBgCommand } from '@/core/commands/ChangeBg/changeBgCommand'
-import { historyCommand } from '@/core/commands/history/historyCommand'
+import { historyCommand } from '@/core/commands/History/historyCommand'
+import { gotoCommand } from '@/core/commands/Goto/gotoCommand'
+import { todoCommand } from '@/core/commands/Todo/todoCommand'
+import { manCommand } from '@/core/commands/Man/manCommand'
 
 const commandList: Command.ICommandType[] = [
   seeTimeCommand,
   clearScreenCommand,
   changeBgCommand,
-  historyCommand
+  historyCommand,
+  gotoCommand,
+  todoCommand,
+  manCommand
 ]
 
 /**

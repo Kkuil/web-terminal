@@ -15,7 +15,7 @@ declare namespace Command {
     // 子命令
     subCommands?: Record<string, ICommandType>
     // 执行功能
-    action: ({ params, options }: CommandActionParamsType) => WebTerminal.OutputType | {} | Promise<WebTerminal.OutputType | {}>
+    action: ({ params, options }?: CommandActionParamsType) => WebTerminal.OutputType | {} | Promise<WebTerminal.OutputType | {}>
     // 结果是否允许折叠
     collapsible?: boolean
   }
@@ -46,18 +46,16 @@ declare namespace Command {
    * action函数接收四个参数
    */
   interface CommandActionParamsType {
-    params: string[]
-    options: Record<string, string>
+    params?: string[]
+    options?: Record<string, string>
   }
 
   /**
    * 解析后的命令行参数，为了后续操作方便，统一转换为对象
    */
   interface CommandParsedResultType {
-    originCommand: string
-    main: string
+    action: ({ params, options }?: CommandActionParamsType) => WebTerminal.OutputType | {} | Promise<WebTerminal.OutputType | {}>
     params?: string[]
     options?: Record<string, string>
-    subCommands?: Record<string, CommandParamsResultType>
   }
 }

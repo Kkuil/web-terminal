@@ -14,7 +14,6 @@ export const clearScreenCommand: Command.ICommandType = {
     const terminalStore = useTerminalStore()
     const commandStore = useCommandStore()
     // 清空欢迎
-    console.log(123)
     terminalStore.hideWelcome()
     // 清空命令
     commandStore.clear()

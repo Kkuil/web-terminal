@@ -5,7 +5,7 @@ import commandExecutor from '@/core/commandExecutor'
 export const useCommandStore = defineStore('command', {
   state: () => ({
     commandInput: {
-      command: '',
+      command: ''
     },
     listOutput: [] as WebTerminal.CommandOutputType[]
   }),
@@ -23,24 +23,23 @@ export const useCommandStore = defineStore('command', {
         const windowHeight = window.innerHeight
         window.scrollTo(0, documentHeight - windowHeight)
       }, 50)
-
       // 1. 解析命令
-      const parsedCommand = commandParser(command)
+      const parsedCommand = commandParser(command.trim())
       // 2. 执行命令
-      commandExecutor(parsedCommand)
+      commandExecutor(command, parsedCommand)
     },
     // 清屏
     clear() {
       this.listOutput = []
     },
     // 增加输出
-    addOutput(command: string, output: WebTerminal.OutputType) {
+    async addOutput(command: string, output: WebTerminal.OutputType | {}) {
       const newOutput: WebTerminal.CommandOutputType = {
         id: Date.now().toString(),
         command,
-        output
+        output: await output
       }
-      this.listOutput.push(newOutput)
+      this.listOutput.push(await newOutput)
     }
   }
   // 持久化

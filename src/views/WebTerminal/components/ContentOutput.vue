@@ -44,16 +44,12 @@ const outputTagColor = computed((): string => {
     </template>
     <component
       :is="output.component"
-      v-if="output.type === 'component'"
+      v-else-if="output.type === 'component'"
       v-bind="output.props ?? {}"
     />
   </div>
 </template>
 
 <style scoped>
-.content-output :deep(.ant-tag) {
-  border-radius: 0;
-  font-size: 16px;
-  border: none;
-}
+
 </style>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import ContentOutput from './ContentOutput.vue'
 
 defineProps<{
@@ -10,16 +9,8 @@ defineProps<{
 <template>
   <div v-for="result in list" :key="result.id">
     [local]$ <span>{{ result.command }}</span>
-    <ContentOutput
-      v-if="!result.output?.resultList?.length"
-      :output="result.output as WebTerminal.OutputType"
-    />
-    <ContentOutput
-      v-else
-      v-for="output in result.output.resultList"
-      :key="output.id"
-      :output="output"
-    />
+    <ContentOutput v-if="!result.output?.resultList?.length" :output="result.output as WebTerminal.OutputType" />
+    <ContentOutput v-else v-for="(output, index) in result.output?.resultList" :key="index" :output="output" />
   </div>
 </template>
 

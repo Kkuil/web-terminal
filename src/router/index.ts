@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'web-terminal',
-      component: () => import('@/components/WebTerminal.vue')
+      component: () => import('@/views/WebTerminal/WebTerminal.vue')
     }
   ]
 })

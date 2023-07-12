@@ -27,6 +27,6 @@ declare namespace WebTerminal {
   interface CommandOutputType {
     id: string
     command: string
-    output: OutputType | {}
+    output: OutputType
   }
 }

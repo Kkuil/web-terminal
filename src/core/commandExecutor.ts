@@ -9,7 +9,7 @@ export default function (originCommand: string, parsedCommand: Command.CommandPa
   const commandStore = useCommandStore()
   const historyStore = useHistoryStore()
   // 添加到历史记录
-  historyStore.addHistory(parsedCommand.originCommand)
+  historyStore.addHistory(originCommand)
 
   // 增加命令输出
   commandStore.addOutput(
@@ -20,8 +20,8 @@ export default function (originCommand: string, parsedCommand: Command.CommandPa
     })
   )
   if (
-    parsedCommand.originCommand.startsWith('clear') ||
-    parsedCommand.originCommand.startsWith('cls')
+    originCommand.startsWith('clear') ||
+    originCommand.startsWith('cls')
   ) {
     parsedCommand.action()
   }

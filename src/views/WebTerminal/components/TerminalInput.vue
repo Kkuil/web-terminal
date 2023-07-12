@@ -5,11 +5,18 @@ import _ from 'lodash'
 import { computed, nextTick, ref } from 'vue'
 import { useHistoryStore } from '@/stores/history'
 
+interface HintCommandType {
+  prefix: string
+  command: Command.ICommandType | null
+}
+
 const commandStore = useCommandStore()
 const historyStore = useHistoryStore()
 const historyIndex = ref<number>(historyStore.list.length)
 
 const commandInputRef = ref<HTMLInputElement>()
+// 当前需要提示的命令对象
+const currentHintCommand = ref<HintCommandType | null>()
 
 nextTick(() => {
   // 聚焦
@@ -27,26 +34,28 @@ const mapKeyToCommand = {
   },
   ArrowUp: (e: InputEvent) => {
     e.preventDefault()
+    commandStore.commandInput.command = historyStore.list[historyIndex.value]
     if (historyIndex.value > 0) {
       historyIndex.value--
     } else {
       historyIndex.value = 0
     }
-    console.log(historyIndex.value)
-    commandStore.commandInput.command = historyStore.list[historyIndex.value]
   },
   ArrowDown: (e: InputEvent) => {
     e.preventDefault()
-    if (historyIndex.value <= historyStore.list.length) {
+    if (historyIndex.value < historyStore.list.length) {
       historyIndex.value++
     } else {
       historyIndex.value = historyStore.list.length
     }
     commandStore.commandInput.command = historyStore.list[historyIndex.value]
   },
-  Tab: () => {
-    if (hint.value) {
-      commandStore.commandInput.command = hint.value
+  Tab: (e: InputEvent) => {
+    e.preventDefault()
+    if (currentHintCommand.value) {
+      commandStore.commandInput.command = currentHintCommand.value?.prefix
+        ? currentHintCommand.value?.prefix + ' ' + currentHintCommand.value?.command?.main
+        : currentHintCommand.value?.command?.main ?? '' + ' '
       nextTick(() => {
         // 聚焦
         commandInputRef.value?.focus()
@@ -55,33 +64,57 @@ const mapKeyToCommand = {
   }
 }
 
-// 当前需要提示的命令对象
-const currentHintCommand = ref<Command.ICommandType | null>()
-
 // 搜索命令提示
 const searchHint = _.debounce((e: InputEvent) => {
-  const value = e.target?.value?.trim()?.toLowerCase()
+  const value = e.target?.value?.trim()
   if (!value) {
     currentHintCommand.value = null
     return
   }
-  for (let key in commandMap) {
-    if (key === value || commandMap[key].alias?.filter((alia: string) => alia === value).length) {
-      currentHintCommand.value = commandMap[key]
-      break
-    } else if (
-      key.startsWith(value) ||
-      commandMap[key].alias?.filter((alia: string) => alia.startsWith(value)).length
-    ) {
-      currentHintCommand.value = commandMap[key]
-      break
+  // 递归搜索命令
+  currentHintCommand.value = searchCommand('', value, commandMap)
+  console.log(currentHintCommand.value)
+}, 300)
+
+// 搜索命令
+const searchCommand = (
+  prefix: string,
+  command: string,
+  parentCommand: Record<string, Command.ICommandType> = commandMap
+): HintCommandType => {
+  // 去除命令首尾空格
+  command = command.trim()
+  // 分割命令
+  const commandSlice = command.split(' ')
+  // 主命令
+  const main = commandSlice[0]
+  // 判断主命令是否存在
+  const commands = Object.keys(parentCommand).filter((key) => key.startsWith(main))
+  if (commands.length === 0) {
+    return {
+      prefix: '',
+      command: null
+    }
+  } else {
+    if (commandSlice.length > 1 && parentCommand[main].subCommands) {
+      // 递归解析子命令
+      return searchCommand(
+        parentCommand[commands[0]].main,
+        commandSlice.slice(1).join(' '),
+        parentCommand[main].subCommands
+      )
+    } else {
+      return {
+        prefix,
+        command: parentCommand[commands[0]]
+      }
     }
   }
-}, 300)
+}
 
 // 计算当前命令提示
 const hint = computed(() => {
-  const command = currentHintCommand.value
+  const command = currentHintCommand.value?.command
   if (command) {
     // 拼参数接命令提示
     const params = command?.params
@@ -95,9 +128,9 @@ const hint = computed(() => {
         return `[--${option?.key}(${alias ?? ''}) ${option.desc}]`
       })
       .join(' ')
-    return `${command?.main}${params ? ` ${params}` : ''}${options ? ` ${options}` : ''}${
-      command?.desc ? ` ${command?.desc}` : ''
-    }`
+    return `${currentHintCommand.value?.prefix} ${command?.main}${params ? ` ${params}` : ''}${
+      options ? ` ${options}` : ''
+    }${command?.desc ? ` ${command?.desc}` : ''}`
   }
   return ''
 })

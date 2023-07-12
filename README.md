@@ -1,5 +1,4 @@
 # Web-terminal - 一款专门为程序员所打造的Web终端项目⭐️
-## 线上体验地址：https://www.kkuil.site
 ## 项目部分效果图:
 
 ![effect](./assets/effect.png)

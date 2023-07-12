@@ -17,6 +17,7 @@ export const manCommand: Command.ICommandType = {
       required: false
     }
   ],
+  // @ts-ignore
   action: ({ params }): WebTerminal.OutputType => {
     const showCommands: Command.ICommandType[] = []
     for (let i = 0; i < params.length; i++) {

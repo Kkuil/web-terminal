@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import smartText from '@/utils/smartText'
-import OutputType = WebTerminal.OutputType
 import { computed, toRefs } from 'vue'
 
 interface OutputProps {
-  output: OutputType
+  output: WebTerminal.OutputType
 }
 
 const props = defineProps<OutputProps>()

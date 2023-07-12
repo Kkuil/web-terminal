@@ -7,6 +7,7 @@ export const resetCommand: Command.ICommandType = {
   main: 'reset',
   name: '重置',
   desc: '重置配置',
+  // @ts-ignore
   action: ({ params }) => {
     const terminalStore = useTerminalStore()
     terminalStore.$reset()

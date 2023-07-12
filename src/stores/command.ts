@@ -37,7 +37,7 @@ export const useCommandStore = defineStore('command', {
       const newOutput: WebTerminal.CommandOutputType = {
         id: Date.now().toString(),
         command,
-        output: await output
+        output: await output as WebTerminal.OutputType
       }
       this.listOutput.push(await newOutput)
     }

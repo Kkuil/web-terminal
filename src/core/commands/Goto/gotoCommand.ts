@@ -23,6 +23,7 @@ export const gotoCommand: Command.ICommandType = {
       required: false
     }
   ],
+  // @ts-ignore
   action: async ({ params, options }) => {
     if (!params[0]) {
       return {
@@ -33,12 +34,6 @@ export const gotoCommand: Command.ICommandType = {
     }
     const keys = Object.keys(options)
     const isBlank = keys.includes('position') || keys.includes('p')
-    // 优先找空间条目链接
-    // let { getItem } = useSpaceStore();
-    // const item = getItem(params[0]);
-    // if (item?.link) {
-    //   params[0] = item?.link;
-    // }
     if (!params[0].startsWith('http://') && !params[0].startsWith('https://')) {
       params[0] = 'http://' + params[0]
     }

@@ -19,6 +19,7 @@ export const changeBgCommand: Command.ICommandType = {
       required: false
     }
   ],
+  // @ts-ignore
   action: async ({ params = ['wallpaper'] }) => {
     if (params[0] && !types.includes(params[0])) {
       return {

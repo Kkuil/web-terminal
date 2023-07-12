@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
 
 defineProps<{
   commands: Command.ICommandType[]
 }>()
+defineOptions({
+  name: "ManOperation"
+})
 </script>
 
 <template>

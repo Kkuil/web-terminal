@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { useTerminalStore } from '@/stores/terminal'
 
 interface Props {
@@ -9,6 +8,9 @@ interface Props {
 
 const terminalStore = useTerminalStore()
 defineProps<Props>()
+defineOptions({
+  name: "HistoryOperation"
+})
 </script>
 
 <template>

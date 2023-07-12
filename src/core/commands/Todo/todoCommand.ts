@@ -12,6 +12,7 @@ export const todoCommand: Command.ICommandType = {
   subCommands: {
     add: addCommand
   },
+  // @ts-ignore
   action: async ({ params }) => {
     const todoBox = {
       type: 'component',

@@ -66,6 +66,7 @@ const mapKeyToCommand = {
 
 // 搜索命令提示
 const searchHint = _.debounce((e: InputEvent) => {
+  // @ts-ignore
   const value = e.target?.value?.trim()
   if (!value) {
     currentHintCommand.value = null
@@ -137,6 +138,7 @@ const hint = computed(() => {
 
 // 提交命令
 const onKeyUp = (keyboardEvent: KeyboardEvent) => {
+  // @ts-ignore
   mapKeyToCommand[keyboardEvent.key]?.(keyboardEvent)
 }
 </script>
@@ -149,7 +151,7 @@ const onKeyUp = (keyboardEvent: KeyboardEvent) => {
       class="bg-transparent flex-1 outline-none"
       v-model="commandStore.commandInput.command"
       @keydown.stop="onKeyUp"
-      @input="searchHint"
+      @input="(searchHint as Function)"
       placeholder="请输入命令"
     />
   </div>

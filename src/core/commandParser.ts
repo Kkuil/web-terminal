@@ -38,6 +38,7 @@ const commandParser = (
   if (
     options._.length > 0 &&
     parentCommand[main].subCommands &&
+    // @ts-ignore
     parentCommand[main].subCommands[options._[0]]
   ) {
     console.log(`${main}: `, options._.join(' '))

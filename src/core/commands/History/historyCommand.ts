@@ -35,6 +35,7 @@ export const historyCommand: Command.ICommandType = {
       required: false
     }
   ],
+  // @ts-ignore
   action: async ({ options }) => {
     console.log(Object.keys(options).includes('clean') || Object.keys(options).includes('l'))
     const terminalStore = useTerminalStore()

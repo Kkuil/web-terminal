@@ -16,6 +16,7 @@ export const addCommand: Command.ICommandType = {
       required: true
     }
   ],
+  // @ts-ignore
   action: async ({ params }) => {
     if(!params || params.length === 0) {
       return {

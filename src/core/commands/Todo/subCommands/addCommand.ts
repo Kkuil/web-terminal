@@ -17,6 +17,13 @@ export const addCommand: Command.ICommandType = {
     }
   ],
   action: async ({ params }) => {
+    if(!params || params.length === 0) {
+      return {
+        type: 'text',
+        text: `请输入待办事项名称`,
+        status: 'error'
+      }
+    }
     const todoStore = useTodoStore()
     const duplicateIndex = todoStore.list.findIndex((todo) => todo.name === params[0])
     // 不等于-1说明有重复

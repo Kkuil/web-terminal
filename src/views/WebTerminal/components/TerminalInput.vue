@@ -3,7 +3,7 @@ import { useCommandStore } from '@/stores/command'
 import { commandMap } from '@/core/commandRegister'
 import _ from 'lodash'
 import { computed, nextTick, ref } from 'vue'
-import { useHistoryStore } from '@/stores/history'
+import { useTerminalStore } from '@/stores/terminal'
 
 interface HintCommandType {
   prefix: string
@@ -11,8 +11,8 @@ interface HintCommandType {
 }
 
 const commandStore = useCommandStore()
-const historyStore = useHistoryStore()
-const historyIndex = ref<number>(historyStore.list.length)
+const terminalStore = useTerminalStore()
+const historyIndex = ref<number>(terminalStore.config.history.length)
 
 const commandInputRef = ref<HTMLInputElement>()
 // 当前需要提示的命令对象
@@ -27,14 +27,14 @@ nextTick(() => {
 const mapKeyToCommand = {
   Enter: () => {
     // 重置历史记录索引
-    historyIndex.value = historyStore.list.length
+    historyIndex.value = terminalStore.config.history.length
     // 清除提示
     currentHintCommand.value = null
     commandStore.submitCommand(commandStore.commandInput.command)
   },
   ArrowUp: (e: InputEvent) => {
     e.preventDefault()
-    commandStore.commandInput.command = historyStore.list[historyIndex.value]
+    commandStore.commandInput.command = terminalStore.config.history[historyIndex.value]
     if (historyIndex.value > 0) {
       historyIndex.value--
     } else {
@@ -43,12 +43,12 @@ const mapKeyToCommand = {
   },
   ArrowDown: (e: InputEvent) => {
     e.preventDefault()
-    if (historyIndex.value < historyStore.list.length) {
+    if (historyIndex.value < terminalStore.config.history.length) {
       historyIndex.value++
     } else {
-      historyIndex.value = historyStore.list.length
+      historyIndex.value = terminalStore.config.history.length
     }
-    commandStore.commandInput.command = historyStore.list[historyIndex.value]
+    commandStore.commandInput.command = terminalStore.config.history[historyIndex.value]
   },
   Tab: (e: InputEvent) => {
     e.preventDefault()
@@ -74,7 +74,7 @@ const searchHint = _.debounce((e: InputEvent) => {
   // 递归搜索命令
   currentHintCommand.value = searchCommand('', value, commandMap)
   console.log(currentHintCommand.value)
-}, 300)
+}, 100)
 
 // 搜索命令
 const searchCommand = (

@@ -17,7 +17,11 @@ export const clearScreenCommand: Command.ICommandType = {
     terminalStore.hideWelcome()
     // 清空命令
     commandStore.clear()
-    return {}
+    return {
+      type: "text",
+      text: "清空成功",
+      status: 'success'
+    }
   },
   collapsible: true
 }

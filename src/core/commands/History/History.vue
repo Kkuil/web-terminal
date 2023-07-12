@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { useHistoryStore } from '@/stores/history'
+import { useTerminalStore } from '@/stores/terminal'
 
 interface Props {
   number?: number
   order?: number
 }
 
-const historyStore = useHistoryStore()
+const terminalStore = useTerminalStore()
 defineProps<Props>()
 </script>
 
@@ -22,7 +22,10 @@ defineProps<Props>()
       </thead>
       <tbody>
         <tr
-          v-for="(history, index) in historyStore.list.slice(0, number ?? historyStore.list.length)"
+          v-for="(history, index) in terminalStore.config.history.slice(
+            0,
+            number ?? terminalStore.config.history.length
+          )"
           :key="index"
         >
           <td class="order h-full" v-show="order">{{ index + 1 }}</td>

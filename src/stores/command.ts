@@ -42,15 +42,4 @@ export const useCommandStore = defineStore('command', {
       this.listOutput.push(await newOutput)
     }
   }
-  // 持久化
-  // persist: {
-  //   key: 'command-store',
-  //   storage: window.localStorage,
-  //   beforeRestore: (context) => {
-  //     console.log('load spaceStore data start')
-  //   },
-  //   afterRestore: (context) => {
-  //     console.log('load spaceStore data end')
-  //   }
-  // }
 })

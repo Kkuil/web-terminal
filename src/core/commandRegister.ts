@@ -5,6 +5,7 @@ import { historyCommand } from '@/core/commands/History/historyCommand'
 import { gotoCommand } from '@/core/commands/Goto/gotoCommand'
 import { todoCommand } from '@/core/commands/Todo/todoCommand'
 import { manCommand } from '@/core/commands/Man/manCommand'
+import { resetCommand } from '@/core/commands/Reset/resetCommand'
 
 const commandList: Command.ICommandType[] = [
   seeTimeCommand,
@@ -13,7 +14,8 @@ const commandList: Command.ICommandType[] = [
   historyCommand,
   gotoCommand,
   todoCommand,
-  manCommand
+  manCommand,
+  resetCommand
 ]
 
 /**

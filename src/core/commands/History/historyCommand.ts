@@ -1,5 +1,5 @@
 import { defineAsyncComponent } from 'vue'
-import { useHistoryStore } from '@/stores/history'
+import { useTerminalStore } from '@/stores/terminal'
 
 /**
  * @description 历史记录
@@ -37,10 +37,10 @@ export const historyCommand: Command.ICommandType = {
   ],
   action: async ({ options }) => {
     console.log(Object.keys(options).includes('clean') || Object.keys(options).includes('l'))
-    const historyStore = useHistoryStore()
+    const terminalStore = useTerminalStore()
     if (Object.keys(options).includes('clean') || Object.keys(options).includes('l')) {
-      if (historyStore.list.length > 1) {
-        historyStore.clearHistory()
+      if (terminalStore.config.history.length > 1) {
+        terminalStore.clearHistory()
         return {
           type: 'text',
           text: '清空成功',

@@ -12,11 +12,25 @@ export const todoCommand: Command.ICommandType = {
   subCommands: {
     add: addCommand
   },
-  action: async () => {
-    return {
+  action: async ({ params }) => {
+    const todoBox = {
       type: 'component',
-      component: defineAsyncComponent(() => import("@/core/commands/Todo/TodoBox.vue"))
+      component: defineAsyncComponent(() => import('@/core/commands/Todo/TodoBox.vue'))
     }
+    if (params.length > 0) {
+      return {
+        type: 'command',
+        resultList: [
+          {
+            type: 'text',
+            text: `参数 ${params.join(',')} 是冗余的`,
+            status: 'warning'
+          },
+          todoBox
+        ]
+      }
+    }
+    return todoBox
   },
   collapsible: true
 }

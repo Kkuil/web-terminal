@@ -11,7 +11,7 @@
     上，让你可以自由地开发和定制自己的主页。 <br />
     作者
     <a href="https://github.com/Kkuil" class="text-[#0094ff]" target="_blank">Kkuil</a>
-    为您介绍 Web-terminal 的一些使用方法，请输入 'help' 开始探索吧！
+    为您介绍 Web-terminal 的一些使用方法，请输入 'man' 开始探索吧！
   </div>
 </template>
 

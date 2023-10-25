@@ -11,6 +11,11 @@
     "compilerOptions": {
         "types": [
             "element-plus/global"
-        ]
+        ],
+        "paths": {
+            "@": [
+                "src"
+            ]
+        }
     }
 }

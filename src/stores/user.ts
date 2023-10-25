@@ -1,17 +1,28 @@
-import { ref } from 'vue'
-import type { Ref } from 'vue'
-import { defineStore } from 'pinia'
+import type { Ref } from "vue"
+import { ref } from "vue"
+import { defineStore } from "pinia"
+import { login } from "@/core/commands/Login/login"
 
-interface UserInfoType {
-  username: string
-  email: string
+interface LoginType {
+    username: string
+    password: string
 }
 
-export const useUserStore = defineStore('user', () => {
-  const userInfo: Ref<UserInfoType> = ref({
-    username: '',
-    email: ''
-  })
+export const useUserStore = defineStore("user", () => {
+    const userInfo: Ref<{ username: string }> = ref({
+        username: ""
+    })
 
-  return { userInfo }
+    /**
+     * 登录
+     * @param data
+     */
+    const loginHandler = async (data: LoginType) => {
+        const result = await login(data)
+        if (result.data) {
+            userInfo.value.username = data.username
+        }
+    }
+
+    return { userInfo, loginHandler }
 })

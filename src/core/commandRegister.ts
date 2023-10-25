@@ -7,6 +7,7 @@ import { todoCommand } from "@/core/commands/Todo/todoCommand"
 import { manCommand } from "@/core/commands/Man/manCommand"
 import { resetCommand } from "@/core/commands/Reset/resetCommand"
 import { loginCommand } from "@/core/commands/Login/loginCommand"
+import { translateCommand } from "@/core/commands/Translate/translateCommand"
 
 const commandList: Command.ICommandType[] = [
     seeTimeCommand,
@@ -17,7 +18,8 @@ const commandList: Command.ICommandType[] = [
     todoCommand,
     manCommand,
     resetCommand,
-    loginCommand
+    loginCommand,
+    translateCommand
 ]
 
 /**

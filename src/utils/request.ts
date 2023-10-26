@@ -5,7 +5,7 @@ const request = axios.create({
     baseURL:
         // @ts-ignore
         process.env.NODE_ENV === "production"
-            ? "https://www.kkuil.site/api"
+            ? "https://kkuily.top/api"
             : "http://127.0.0.1:8056/api",
     timeout: 5000
 })

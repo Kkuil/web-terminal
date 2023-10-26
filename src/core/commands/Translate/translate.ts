@@ -12,6 +12,7 @@ export const translate = (params: {
     to: string
 }): Promise<{ translation: string }> => {
     const salt = Date.now()
+    const curtTime = Date.now()
     return request({
         url: "/youdao",
         method: "GET",
@@ -20,9 +21,9 @@ export const translate = (params: {
             appKey: TRANSLATE_APP_KEY,
             salt,
             signType: "v3",
-            curtTime: Date.now(),
+            curtTime,
             sign: Crypto.SHA256(
-                params.q + params.from + params.to + salt + TRANSLATE_APP_SECRET + Date.now()
+                params.q + params.from + params.to + salt + TRANSLATE_APP_SECRET + curtTime
             )
         }
     })

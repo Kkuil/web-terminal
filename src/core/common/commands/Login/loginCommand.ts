@@ -1,4 +1,4 @@
-import { login } from "@/core/commands/Login/login"
+import { login } from "@/core/common/commands/Login/login"
 import { LOCAL_TOKEN_KEY } from "@/constant/auth"
 
 /**

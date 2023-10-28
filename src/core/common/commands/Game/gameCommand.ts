@@ -1,5 +1,5 @@
 import { defineAsyncComponent } from "vue"
-import { GAME_MAP } from "@/core/commands/Game/gameConst"
+import { GAME_MAP } from "@/core/common/commands/Game/gameConst"
 
 /**
  * @description 登录命令
@@ -21,6 +21,18 @@ export const gameCommand: Command.ICommandType = {
     // @ts-ignore
     action: async ({ params, options }) => {
         const isFull = options.full ?? options.f ?? false
+        if (!params[0]) {
+            return {
+                type: "command",
+                resultList: [
+                    {
+                        type: "text",
+                        text: `请输入游戏`,
+                        status: "warning"
+                    }
+                ]
+            }
+        }
         if (!GAME_MAP[params[0]]) {
             return {
                 type: "command",

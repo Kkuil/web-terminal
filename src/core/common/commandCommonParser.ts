@@ -4,7 +4,7 @@
  */
 import getopts from "getopts"
 
-import { commandMap } from "@/core/commandRegister"
+import { commandMap } from "@/core/common/commandCommonRegister"
 
 /**
  * @description 解析命令
@@ -12,7 +12,7 @@ import { commandMap } from "@/core/commandRegister"
  * @param parentCommand
  * @return Command.CommandParamsResultType
  */
-const commandParser = (
+const commandCommonParser = (
     command: string,
     parentCommand: Record<string, Command.ICommandType> = commandMap
 ): Command.CommandParsedResultType => {
@@ -43,7 +43,7 @@ const commandParser = (
     ) {
         console.log(`${main}: `, options._.join(" "))
         // 递归解析子命令
-        return commandParser(options._.join(" "), parentCommand[main].subCommands)
+        return commandCommonParser(options._.join(" "), parentCommand[main].subCommands)
     }
     // 如果没有子命令，则将opts中_的值都作为参数传递
     return {
@@ -53,4 +53,4 @@ const commandParser = (
     }
 }
 
-export default commandParser
+export default commandCommonParser

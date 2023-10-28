@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ContentOutput from "./ContentOutput.vue"
+import ContentOutput from "@/views/WebTerminal/components/common/ContentOutput.vue"
 
 defineProps<{
     list: WebTerminal.CommandOutputType[]

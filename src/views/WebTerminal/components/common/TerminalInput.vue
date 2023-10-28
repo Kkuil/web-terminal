@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCommandStore } from "@/stores/command"
-import { commandMap } from "@/core/commandRegister"
+import { commandMap } from "@/core/common/commandCommonRegister"
 import _ from "lodash"
 import { computed, nextTick, ref } from "vue"
 import { useTerminalStore } from "@/stores/terminal"
@@ -30,11 +30,12 @@ const mapKeyToCommand = {
         historyIndex.value = terminalStore.config.history.length
         // 清除提示
         currentHintCommand.value = null
-        commandStore.submitCommand(commandStore.commandInput.command)
+        commandStore.submitCommand(commandStore.commandInfo.commandInput.command)
     },
     ArrowUp: (e: InputEvent) => {
         e.preventDefault()
-        commandStore.commandInput.command = terminalStore.config.history[historyIndex.value]
+        commandStore.commandInfo.commandInput.command =
+            terminalStore.config.history[historyIndex.value]
         if (historyIndex.value > 0) {
             historyIndex.value--
         } else {
@@ -48,12 +49,13 @@ const mapKeyToCommand = {
         } else {
             historyIndex.value = terminalStore.config.history.length
         }
-        commandStore.commandInput.command = terminalStore.config.history[historyIndex.value]
+        commandStore.commandInfo.commandInput.command =
+            terminalStore.config.history[historyIndex.value]
     },
     Tab: (e: InputEvent) => {
         e.preventDefault()
         if (currentHintCommand.value) {
-            commandStore.commandInput.command = currentHintCommand.value?.prefix
+            commandStore.commandInfo.commandInput.command = currentHintCommand.value?.prefix
                 ? currentHintCommand.value?.prefix + " " + currentHintCommand.value?.command?.main
                 : currentHintCommand.value?.command?.main ?? "" + " "
             nextTick(() => {
@@ -148,7 +150,7 @@ const onKeyUp = (keyboardEvent: KeyboardEvent) => {
         <input
             ref="commandInputRef"
             class="bg-transparent flex-1 outline-none"
-            v-model="commandStore.commandInput.command"
+            v-model="commandStore.commandInfo.commandInput.command"
             @keydown.stop="onKeyUp"
             @input="searchHint"
             placeholder="请输入命令"

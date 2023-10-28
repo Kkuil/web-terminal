@@ -1,5 +1,5 @@
 import request from "axios"
-import { TRANSLATE_APP_KEY, TRANSLATE_APP_SECRET } from "@/core/commands/Translate/translateConst"
+import { TRANSLATE_APP_KEY, TRANSLATE_APP_SECRET } from "@/core/common/commands/Translate/translateConst"
 import Crypto from "crypto-js"
 
 /**

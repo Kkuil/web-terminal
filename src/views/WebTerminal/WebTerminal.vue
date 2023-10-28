@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import WelcomeComp from "./components/WelcomeComp.vue"
-import TerminalInput from "./components/TerminalInput.vue"
-import TerminalOutputResultList from "./components/TerminalOutputResultList.vue"
+import TerminalInput from "@/views/WebTerminal/components/common/TerminalInput.vue"
+import TerminalOutputResultList from "@/views/WebTerminal/components/common/TerminalOutputResultList.vue"
 import { useCommandStore } from "@/stores/command"
 import { useTerminalStore } from "@/stores/terminal"
+import { CommandTypeEnum } from "@/core/enums/CommandTypeEnum"
+import SSHInput from "@/views/WebTerminal/components/ssh/SSHInput.vue"
+import SSHOutputResultList from "@/views/WebTerminal/components/ssh/SSHOutputResultList.vue"
 
 const commandStore = useCommandStore()
 const terminalStore = useTerminalStore()
@@ -14,8 +17,16 @@ const terminalStore = useTerminalStore()
         class="web-terminal w-screen min-h-screen overflow-x-hidden bg-black text-white p-[15px] opacity-80"
     >
         <WelcomeComp v-if="terminalStore.config.isShowWelcome" />
-        <TerminalOutputResultList :list="commandStore.listOutput" />
-        <TerminalInput />
+        <TerminalOutputResultList
+            v-if="commandStore.commandInfo.mode === CommandTypeEnum.COMMON"
+            :list="commandStore.commandInfo.listOutput"
+        />
+        <SSHOutputResultList
+            v-else-if="commandStore.commandInfo.mode === CommandTypeEnum.SSH"
+            :list="commandStore.commandInfo.sshOutput"
+        />
+        <TerminalInput v-if="commandStore.commandInfo.mode === CommandTypeEnum.COMMON" />
+        <SSHInput v-else-if="commandStore.commandInfo.mode === CommandTypeEnum.SSH" />
     </div>
 </template>
 

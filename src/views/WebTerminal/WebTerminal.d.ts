@@ -29,4 +29,11 @@ declare namespace WebTerminal {
         command: string
         output: OutputType
     }
+
+    // ssh命令输出类型
+    interface SSHCommandOutputType {
+        id: string
+        command: string
+        output?: string[]
+    }
 }

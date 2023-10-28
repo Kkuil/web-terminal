@@ -1,4 +1,4 @@
-import { translate } from "@/core/commands/Translate/translate"
+import { translate } from "@/core/common/commands/Translate/translate"
 
 /**
  * @description 登录命令

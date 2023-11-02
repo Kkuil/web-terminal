@@ -33,7 +33,7 @@ export const manCommand: Command.ICommandType = {
         }
         return {
             type: "component",
-            component: defineAsyncComponent(() => import("@/core/commands/Man/Man.vue")),
+            component: defineAsyncComponent(() => import("@/core/common/commands/Man/Man.vue")),
             props: {
                 commands: showCommands.length ? showCommands : commandList
             }

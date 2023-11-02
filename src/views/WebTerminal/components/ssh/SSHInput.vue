@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCommandStore } from "@/stores/command"
-import { nextTick, ref } from "vue"
+import { ref } from "vue"
 import { useTerminalStore } from "@/stores/terminal"
 
 const commandStore = useCommandStore()
@@ -8,11 +8,6 @@ const terminalStore = useTerminalStore()
 const historyIndex = ref<number>(terminalStore.config.SSHHistory.length)
 
 const commandInputRef = ref<HTMLInputElement>()
-
-nextTick(() => {
-    // 聚焦
-    commandInputRef.value?.focus()
-})
 
 // 键盘事件映射
 const mapKeyToCommand = {

@@ -17,7 +17,7 @@ export const todoCommand: Command.ICommandType = {
         const todoBox = {
             type: "component",
             // @ts-ignore
-            component: defineAsyncComponent(() => import("@/core/commands/Todo/TodoBox.vue"))
+            component: defineAsyncComponent(() => import("@/core/common/commands/Todo/TodoBox.vue"))
         }
         if (params.length > 0) {
             return {

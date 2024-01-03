@@ -48,7 +48,7 @@ export const addCommand: Command.ICommandType = {
                 {
                     type: "component",
                     component: defineAsyncComponent(
-                        () => import("@/core/commands/Todo/TodoBox.vue")
+                        () => import("@/core/common/commands/Todo/TodoBox.vue")
                     )
                 }
             ]

@@ -1,7 +1,7 @@
 import type { Ref } from "vue"
 import { ref } from "vue"
 import { defineStore } from "pinia"
-import { login } from "@/core/commands/Login/login"
+import { login } from "@/core/common/commands/Login/login"
 
 interface LoginType {
     username: string

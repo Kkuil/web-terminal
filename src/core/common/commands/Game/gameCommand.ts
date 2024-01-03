@@ -33,7 +33,7 @@ export const gameCommand: Command.ICommandType = {
                 ]
             }
         }
-        if (!GAME_MAP[params[0]]) {
+        if (!GAME_MAP[params[0] as string]) {
             return {
                 type: "command",
                 resultList: [
@@ -51,7 +51,7 @@ export const gameCommand: Command.ICommandType = {
                 {
                     type: "component",
                     component: defineAsyncComponent(
-                        () => import("@/core/commands/Game/GameComp.vue")
+                        () => import("@/core/common/commands/Game/GameComp.vue")
                     ),
                     props: {
                         isFull,

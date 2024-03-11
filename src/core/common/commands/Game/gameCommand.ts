@@ -50,9 +50,7 @@ export const gameCommand: Command.ICommandType = {
             resultList: [
                 {
                     type: "component",
-                    component: defineAsyncComponent(
-                        () => import("@/core/commands/Game/GameComp.vue")
-                    ),
+                    component: defineAsyncComponent(() => import("./GameComp.vue")),
                     props: {
                         isFull,
                         name: params[0]

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-import { GAME_MAP } from "@/core/commands/Game/gameConst"
+import { GAME_MAP } from "@/core/common/commands/Game/gameConst"
 
 const props = defineProps<{
     name: string
@@ -10,7 +10,7 @@ const props = defineProps<{
 const iframe = ref<HTMLIFrameElement>()
 
 const fullscreen = () => {
-    if (iframe.value.requestFullscreen) {
+    if (iframe?.value?.requestFullscreen) {
         if (!document.fullscreenElement) {
             if ("requestFullscreen" in iframe.value) {
                 iframe.value.requestFullscreen()

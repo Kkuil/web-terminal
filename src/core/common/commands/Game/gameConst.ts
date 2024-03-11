@@ -1,4 +1,4 @@
-export const GAME_MAP = {
+export const GAME_MAP: Record<string, string> = {
     shitoujiandaobu: "https://haiyong.site/moyu/shitoujiandaobu/",
     lion: "https://haiyong.site/moyu/lion.html",
     shengchengshu: "https://haiyong.site/moyu/shengchengshu.html",

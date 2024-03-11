@@ -33,7 +33,7 @@ export const gameCommand: Command.ICommandType = {
                 ]
             }
         }
-        if (!GAME_MAP[params[0]]) {
+        if (!GAME_MAP[params[0] as string]) {
             return {
                 type: "command",
                 resultList: [

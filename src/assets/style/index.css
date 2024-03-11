@@ -3,6 +3,11 @@
   font-family: courier-new, courier, monospace;
   transition: all 0.3s ease-in-out; }
 
+html {
+  background-color: var(--bg-100) !important; }
+  html * {
+    color: var(--text-100) !important; }
+
 .flex-center {
   display: flex;
   justify-content: center;

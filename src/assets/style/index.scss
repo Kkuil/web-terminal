@@ -3,6 +3,14 @@
   transition: all 0.3s ease-in-out;
 }
 
+html {
+  background-color: var(--bg-100) !important;
+
+  * {
+    color: var(--text-100) !important;
+  }
+}
+
 .flex-center {
   display: flex;
   justify-content: center;

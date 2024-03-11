@@ -13,7 +13,7 @@ const onChange = () => {
 </script>
 
 <template>
-    <el-switch v-model="theme" @change="onChange">
+    <el-switch v-model="theme" @change="onChange" size="large">
         <template #active-action>
             <i class="iconfont icon-sun"></i>
         </template>
@@ -23,4 +23,14 @@ const onChange = () => {
     </el-switch>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.el-switch__core {
+    background-color: var(--bg-100) !important;
+
+    .el-switch__action {
+        .iconfont {
+            color: #000 !important;
+        }
+    }
+}
+</style>

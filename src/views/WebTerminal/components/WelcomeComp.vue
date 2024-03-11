@@ -22,11 +22,11 @@ const dialogVisible = ref(false)
     </div>
     <el-dialog v-model="dialogVisible" title="全局设置" width="500">
         <template #default>
-            <div class="font flex justify-between">
+            <div class="font flex justify-between text-[17px]">
                 <span>字体大小</span>
                 <div>123</div>
             </div>
-            <div class="theme flex justify-between mt-[10px]">
+            <div class="theme flex justify-between mt-[10px] text-[17px]">
                 <span>主题色</span>
                 <ThemeComp />
             </div>
@@ -34,4 +34,12 @@ const dialogVisible = ref(false)
     </el-dialog>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.el-dialog {
+    background-color: var(--bg-100) !important;
+
+    * {
+        color: var(--text-100) !important;
+    }
+}
+</style>

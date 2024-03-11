@@ -8,6 +8,7 @@ import "element-plus/dist/index.css"
 import "@/assets/style/tailwind.css"
 import "@/assets/style/index.scss"
 import "@/assets/style/iconfont.css"
+import "@/assets/style/_variables.css"
 
 const app = createApp(App)
 

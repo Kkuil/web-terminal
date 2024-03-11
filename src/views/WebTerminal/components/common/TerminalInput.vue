@@ -146,10 +146,10 @@ const onKeyUp = (keyboardEvent: KeyboardEvent) => {
 
 <template>
     <div class="terminal-input flex">
-        <span class="mr-[10px]">[local]$ </span>
+        <span class="mr-[10px] text-[--text-100]">[local]$ </span>
         <input
             ref="commandInputRef"
-            class="bg-transparent flex-1 outline-none"
+            class="bg-transparent flex-1 outline-none placeholder-[--text-200] text-[--text-100]"
             v-model="commandStore.commandInfo.commandInput.command"
             @keydown.stop="onKeyUp"
             @input="searchHint"

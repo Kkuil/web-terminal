@@ -8,7 +8,8 @@ defineProps<{
 
 <template>
     <div v-for="result in list" :key="result.id">
-        [local]$ <span>{{ result.command }}</span>
+        <span class="text-[--text-100]"> [local]$ </span>
+        <span>{{ result.command }}</span>
         <ContentOutput
             v-if="!result.output?.resultList?.length"
             :output="result.output as WebTerminal.OutputType"

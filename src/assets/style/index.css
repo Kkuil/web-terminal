@@ -1,0 +1,24 @@
+@charset "UTF-8";
+* {
+  font-family: courier-new, courier, monospace;
+  transition: all 0.3s ease-in-out; }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/* 隐藏滚动条 */
+body::-webkit-scrollbar {
+  width: 0;
+  /* 设置滚动条的宽度 */ }
+
+body::-webkit-scrollbar-track {
+  background: none;
+  /* 设置滚动条背景颜色 */ }
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  /* 设置滚动条的颜色 */ }
+
+/*# sourceMappingURL=index.css.map */

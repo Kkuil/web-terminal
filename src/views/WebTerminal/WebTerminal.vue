@@ -13,9 +13,7 @@ const terminalStore = useTerminalStore()
 </script>
 
 <template>
-    <div
-        class="web-terminal w-screen min-h-screen overflow-x-hidden bg-black text-white p-[15px] opacity-80"
-    >
+    <div class="web-terminal w-screen min-h-screen overflow-x-hidden bg-[--bg-100] p-[15px]">
         <WelcomeComp v-if="terminalStore.config.isShowWelcome" />
         <TerminalOutputResultList
             v-if="commandStore.commandInfo.mode === CommandTypeEnum.COMMON"

@@ -4,9 +4,9 @@
   transition: all 0.3s ease-in-out; }
 
 html {
-  background-color: var(--bg-100) !important; }
+  background-color: var(--bg-100); }
   html * {
-    color: var(--text-100) !important; }
+    color: var(--text-100); }
 
 .flex-center {
   display: flex;

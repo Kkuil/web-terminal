@@ -2,13 +2,13 @@ import { useTodoStore } from "@/stores/todo"
 import { defineAsyncComponent } from "vue"
 
 /**
- * @description 增加待办事项
+ * @description 删除待办事项
  * @param {{}} args
  */
-export const addCommand: Command.ICommandType = {
-    main: "add",
-    name: "增加待办事项",
-    desc: "增加待办事项",
+export const removeCommand: Command.ICommandType = {
+    main: "remove",
+    name: "删除待办事项",
+    desc: "删除待办事项",
     params: [
         {
             key: "name",
@@ -27,22 +27,22 @@ export const addCommand: Command.ICommandType = {
         }
         const todoStore = useTodoStore()
         const duplicateIndex = todoStore.list.findIndex((todo) => todo.name === params[0])
-        // 不等于-1说明有重复
-        if (duplicateIndex !== -1) {
+        // 等于-1说明不存在
+        if (duplicateIndex === -1) {
             return {
                 type: "text",
-                text: `事项 ${params[0]} 已存在，请不要重复添加`,
+                text: `事项 ${params[0]} 不存在，请重新输入`,
                 status: "warning"
             }
         }
-        // 添加事项
-        todoStore.add(params[0])
+        // 删除事项
+        todoStore.del(params[0])
         return {
             type: "command",
             resultList: [
                 {
                     type: "text",
-                    text: `事项 ${params[0]} 添加成功`,
+                    text: `事项 ${params[0]} 删除成功`,
                     status: "success"
                 },
                 {

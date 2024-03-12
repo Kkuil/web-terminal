@@ -26,3 +26,19 @@ html.light {
     --bg-300: #cccbc8;
 }
 
+html * {
+    font-size: 15px !important;
+}
+
+html.s * {
+    font-size: 13px !important;
+}
+
+html.m * {
+    font-size: 15px !important;
+}
+
+html.l * {
+    font-size: 20px !important;
+}
+

@@ -27,12 +27,10 @@ export const useCommandStore = defineStore("command", () => {
         sshOutput: [] as WebTerminal.SSHCommandOutputType[]
     })
     // 提交命令
-    const submitCommand = (command: string) => {
+    const submitCommand = async (command: string) => {
         if (!command || !command.trim()) {
             return
         }
-        // 清空命令输入
-        commandInfo.value.commandInput.command = ""
         // 自动滚动到底部
         setTimeout(() => {
             const documentHeight = document.documentElement.scrollHeight
@@ -42,7 +40,9 @@ export const useCommandStore = defineStore("command", () => {
         // 1. 解析命令
         const parsedCommand = commandCommonParser(command.trim())
         // 2. 执行命令
-        commandCommonExecutor(command, parsedCommand)
+        await commandCommonExecutor(command, parsedCommand)
+        // 清空命令输入
+        commandInfo.value.commandInput.command = ""
     }
     const submitSSHCommand = (command: string) => {
         if (!command || !command.trim()) {

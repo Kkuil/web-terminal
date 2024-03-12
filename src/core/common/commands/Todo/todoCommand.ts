@@ -1,4 +1,5 @@
 import { addCommand } from "./subCommands/addCommand"
+import { removeCommand } from "./subCommands/removeCommand"
 import { defineAsyncComponent } from "vue"
 
 /**
@@ -10,7 +11,8 @@ export const todoCommand: Command.ICommandType = {
     name: "待办事项",
     desc: "待办事项",
     subCommands: {
-        add: addCommand
+        add: addCommand,
+        remove: removeCommand
     },
     // @ts-ignore
     action: async ({ params }) => {

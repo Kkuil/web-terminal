@@ -25,12 +25,12 @@ nextTick(() => {
 
 // 键盘事件映射
 const mapKeyToCommand = {
-    Enter: () => {
+    Enter: async () => {
         // 重置历史记录索引
         historyIndex.value = terminalStore.config.history.length
+        await commandStore.submitCommand(commandStore.commandInfo.commandInput.command)
         // 清除提示
         currentHintCommand.value = null
-        commandStore.submitCommand(commandStore.commandInfo.commandInput.command)
     },
     ArrowUp: (e: InputEvent) => {
         e.preventDefault()
@@ -156,7 +156,7 @@ const onKeyUp = (keyboardEvent: KeyboardEvent) => {
             placeholder="请输入命令"
         />
     </div>
-    <h4 v-show="hint" class="hint text-[#777]">Hint: {{ hint }}</h4>
+    <h4 v-show="hint" class="hint text-[--text-300]">Hint: {{ hint }}</h4>
 </template>
 
 <style scoped lang="scss"></style>

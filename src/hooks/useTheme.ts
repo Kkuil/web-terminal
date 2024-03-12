@@ -15,7 +15,9 @@ const html = document.querySelector("html")
  */
 const switchTheme = (thm: ThemeEnum) => {
     theme.value = thm
-    html.className = thm
+    html.classList.remove("light")
+    html.classList.remove("dark")
+    html.classList.add(thm)
     localStorage.setItem(LOC_THEME_KEY, thm)
 }
 switchTheme(locTheme)

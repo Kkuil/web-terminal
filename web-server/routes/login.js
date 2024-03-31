@@ -19,4 +19,23 @@ router.post("/login", async function (req, res, next) {
     }
 })
 
+router.post("/auth", async function (req, res, next) {
+    const username = await LoginService.auth(req.headers["token"])
+    if (username) {
+        res.send({
+            code: 200,
+            data: {
+                username
+            },
+            message: "验证成功"
+        })
+    } else {
+        res.send({
+            code: 400,
+            data: false,
+            message: "登录失败"
+        })
+    }
+})
+
 module.exports = router

@@ -9,7 +9,7 @@ module.exports = {
     verify: function (token, secret) {
         // 异常捕获
         try {
-            return JWT.verify(token, secret)
+            return JWT.decode(token, secret)
         } catch (e) {
             console.log(e)
         }

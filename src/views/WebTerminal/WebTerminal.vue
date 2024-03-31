@@ -10,9 +10,11 @@ import SSHOutputResultList from "@/views/WebTerminal/components/ssh/SSHOutputRes
 import { ref, watch } from "vue"
 import ThemeComp from "@/views/WebTerminal/components/ThemeComp.vue"
 import useFontSize, { FontSizeEnum } from "@/hooks/useFontSize"
+import { useUserStore } from "@/stores/user"
 
 const commandStore = useCommandStore()
 const terminalStore = useTerminalStore()
+const userStore = useUserStore()
 
 const fontSizeHooks = useFontSize()
 
@@ -61,6 +63,23 @@ watch(
     </div>
     <el-dialog v-model="dialogVisible" title="全局设置" width="500">
         <template #default>
+            <div
+                v-if="userStore.userInfo.username"
+                class="font flex justify-between text-[17px] mb-[10px]"
+            >
+                <span>登录信息</span>
+                <div class="flex-center">
+                    <img
+                        src="https://w.wallhaven.cc/full/72/wallhaven-72yzje.jpg"
+                        class="w-[45px] h-[45px] rounded-full mr-[10px]"
+                    />
+                    <span>{{ userStore.userInfo.username }}</span>
+                </div>
+            </div>
+            <div v-else class="font flex justify-between text-[17px] mb-[10px]">
+                <span>暂未登录</span>
+                <span>请使用login命令进行登录吧~</span>
+            </div>
             <div class="font flex justify-between text-[17px]">
                 <span>字体大小</span>
                 <el-radio-group size="small" v-model="fontSize">
@@ -69,7 +88,7 @@ watch(
                     <el-radio-button label="大" value="l" />
                 </el-radio-group>
             </div>
-            <div class="theme flex justify-between mt-[10px] text-[17px]">
+            <div class="theme flex justify-between mt-[5px] text-[17px]">
                 <span>主题色</span>
                 <ThemeComp />
             </div>

@@ -14,3 +14,16 @@ export const login = (data: {
         data
     })
 }
+
+/**
+ * 验证
+ */
+export const authLogin = (token: string): Promise<Global.ApiResult<{ username: string }>> => {
+    return request({
+        url: "/user/auth",
+        method: "POST",
+        headers: {
+            token
+        }
+    })
+}

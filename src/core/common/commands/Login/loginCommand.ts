@@ -1,5 +1,6 @@
 import { login } from "@/core/common/commands/Login/login"
 import { LOCAL_TOKEN_KEY } from "@/constant/auth"
+import { useUserStore } from "@/stores/user"
 
 /**
  * @description 登录命令
@@ -55,29 +56,33 @@ export const loginCommand: Command.ICommandType = {
             }
         }
         // 登录
-        const result = await login({ username, password })
-        if (!result.data) {
+        // const result = await login({ username, password })
+        const result = await useUserStore().loginHandler({ username, password })
+        console.log(result)
+        if (result.data) {
+            localStorage.setItem(LOCAL_TOKEN_KEY, result.data)
+            localStorage.setItem("username", username)
             return {
                 type: "command",
                 resultList: [
                     {
                         type: "text",
-                        text: result.message,
+                        text: `${username}登录成功`,
                         status: "success"
                     }
                 ]
             }
-        }
-        localStorage.setItem(LOCAL_TOKEN_KEY, result.data)
-        return {
-            type: "command",
-            resultList: [
-                {
-                    type: "text",
-                    text: `${username}登录成功`,
-                    status: "success"
-                }
-            ]
+        } else {
+            return {
+                type: "command",
+                resultList: [
+                    {
+                        type: "text",
+                        text: "登录失败哦~",
+                        status: "error"
+                    }
+                ]
+            }
         }
     },
     collapsible: true

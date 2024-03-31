@@ -4,6 +4,7 @@ import { commandMap } from "@/core/common/commandCommonRegister"
 import _ from "lodash"
 import { computed, nextTick, ref } from "vue"
 import { useTerminalStore } from "@/stores/terminal"
+import { useUserStore } from "@/stores/user"
 
 interface HintCommandType {
     prefix: string
@@ -12,6 +13,7 @@ interface HintCommandType {
 
 const commandStore = useCommandStore()
 const terminalStore = useTerminalStore()
+const userStore = useUserStore()
 const historyIndex = ref<number>(terminalStore.config.history.length)
 
 const commandInputRef = ref<HTMLInputElement>()
@@ -146,7 +148,9 @@ const onKeyUp = (keyboardEvent: KeyboardEvent) => {
 
 <template>
     <div class="terminal-input flex">
-        <span class="mr-[10px] text-[--text-100]">[local]$ </span>
+        <span class="mr-[10px] text-[--text-100]"
+            >[{{ userStore.userInfo.username || "local" }}]$
+        </span>
         <input
             ref="commandInputRef"
             class="bg-transparent flex-1 outline-none placeholder-[--text-200] text-[--text-100]"
